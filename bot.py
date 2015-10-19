@@ -2,11 +2,13 @@
 # -*- coding:utf-8 -*-
 
 from apscheduler.schedulers.blocking import BlockingScheduler
+from search import SearchTweets
 
 sched = BlockingScheduler()
+search_tweets = SearchTweets()
 
-@sched.scheduled_job('interval', minutes=3)
+@sched.scheduled_job('interval', minutes=1)
 def timed_job():
-    print('This job runs every three minutes.')
+    search_tweets.fetch_tweet()
 
 sched.start()
