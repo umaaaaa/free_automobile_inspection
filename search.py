@@ -6,13 +6,20 @@ import json
 import time, calendar
 import datetime
 import locale
-import twkey
+import commands
+
+# oath_key_dict = {
+#         "consumer_key"       : twkey.twitter_key['consumer_key'],
+#         "consumer_secret"    : twkey.twitter_key['consumer_secret'],
+#         "access_token"       : twkey.twitter_key['access_token'],
+#         "access_token_secret": twkey.twitter_key['access_token_secret']
+#         }
 
 oath_key_dict = {
-        "consumer_key"       : twkey.twitter_key['consumer_key'],
-        "consumer_secret"    : twkey.twitter_key['consumer_secret'],
-        "access_token"       : twkey.twitter_key['access_token'],
-        "access_token_secret": twkey.twitter_key['access_token_secret']
+        "consumer_key"       : commands.getoutput('heroku config:get CONSUMER_KEY'),
+        "consumer_secret"    : commands.getoutput('heroku config:get CONSUMER_SECRET'),
+        "access_token"       : commands.getoutput('heroku config:get ACCESS_TOKEN'),
+        "access_token_secret": commands.getoutput('heroku config:get ACCESS_TOKEN_SECRET')
         }
 
 class SearchTweets:
@@ -67,7 +74,7 @@ class SearchTweets:
         japan_time = datetime.datetime.now() + datetime.timedelta(hours=9)
         url    = "https://api.twitter.com/1.1/statuses/update.json"
         params = {"status": u"行ってはダメだ!!!! \n" + japan_time.strftime("%Y/%m/%d %H:%M:%S")}
-        if tweet_count > 10 :
+        if tweet_count > 7 :
             twitter = OAuth1Session(oath_key_dict["consumer_key"],
                                     oath_key_dict["consumer_secret"],
                                     oath_key_dict["access_token"],
