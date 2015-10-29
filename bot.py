@@ -10,5 +10,6 @@ search_tweets = SearchTweets()
 @sched.scheduled_job('interval', minutes=1)
 def timed_job():
     search_tweets.fetch_tweet()
+    print "Hello"
 
 sched.start()
