@@ -8,13 +8,6 @@ import datetime
 import locale
 import os
 
-# oath_key_dict = {
-#         "consumer_key"       : twkey.twitter_key['consumer_key'],
-#         "consumer_secret"    : twkey.twitter_key['consumer_secret'],
-#         "access_token"       : twkey.twitter_key['access_token'],
-#         "access_token_secret": twkey.twitter_key['access_token_secret']
-#         }
-
 oath_key_dict = {
         "consumer_key"       : os.environ.get('CONSUMER_KEY'),
         "consumer_secret"    : os.environ.get('CONSUMER_SECRET'),
@@ -38,17 +31,11 @@ class SearchTweets:
         six_hours_ago     = host_current_time - datetime.timedelta(hours=6)
         tweets_dic        = {}
 
-        # 本番用:辰巳PAの無料車検調べる用
+        # 辰巳PAの無料車検調べる用
         tweets = searchTweets.tweet_search(
                 u"車検 && 辰巳", oath_key_dict
                 )
 
-        # テスト用：いっぱい取得できるツイートのやつ
-        # tweets = searchTweets.tweet_search(
-        #         u"うまー氏", oath_key_dict
-        #         )
-
-        # ツイートに関するすべてのデータを変数に格納する
         i = 0
         for tweet_all_data in tweets["statuses"]:
             Created_at       = searchTweets.tweet_JapanTime(tweet_all_data["created_at"])
@@ -58,12 +45,6 @@ class SearchTweets:
             user_id          = tweet_all_data[u'user'][u'id_str']
             user_description = tweet_all_data[u'user'][u'description']
             screen_name      = tweet_all_data[u'user'][u'screen_name']
-
-            # 実験用：検索にひっかかるツイート全てを利用
-            # 時間制約を設けてしまうと実験では検索にひっかかるツイートが0になってしまうため
-            # tweets_dic[i] = {'text' : text, 'created_at' : Created_at}
-            # i += 1
-            # print text
 
             # 6時間前までのツイート（つぶやきテキスト）を利用
             if six_hours_ago <= Created_at: 
