@@ -7,7 +7,7 @@ from search import SearchTweets
 sched = BlockingScheduler()
 search_tweets = SearchTweets()
 
-@sched.scheduled_job('interval', minutes=1)
+@sched.scheduled_job('interval', minutes=50)
 def timed_job():
     search_tweets.fetch_tweet()
 
