@@ -2,5 +2,6 @@
 
 ## https://twitter.com/umaaaaa_bot
 
-絶対にこうなりたくない!!!!!!  
-![]('./img/kenmon.jpg')
+絶対に捕まりたくない!!!!!!
+
+![検問](./img/police.jpg)
