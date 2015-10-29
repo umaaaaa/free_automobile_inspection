@@ -6,7 +6,7 @@ import json
 import time, calendar
 import datetime
 import locale
-import commands
+import os
 
 # oath_key_dict = {
 #         "consumer_key"       : twkey.twitter_key['consumer_key'],
@@ -16,10 +16,10 @@ import commands
 #         }
 
 oath_key_dict = {
-        "consumer_key"       : commands.getoutput('heroku config:get CONSUMER_KEY'),
-        "consumer_secret"    : commands.getoutput('heroku config:get CONSUMER_SECRET'),
-        "access_token"       : commands.getoutput('heroku config:get ACCESS_TOKEN'),
-        "access_token_secret": commands.getoutput('heroku config:get ACCESS_TOKEN_SECRET')
+        "consumer_key"       : os.environ.get('CONSUMER_KEY'),
+        "consumer_secret"    : os.environ.get('CONSUMER_SECRET'),
+        "access_token"       : os.environ.get('ACCESS_TOKEN'),
+        "access_token_secret": os.environ.get('ACCESS_TOKEN_SECRET')
         }
 
 class SearchTweets:
