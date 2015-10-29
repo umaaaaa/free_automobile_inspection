@@ -74,7 +74,7 @@ class SearchTweets:
         japan_time = datetime.datetime.now() + datetime.timedelta(hours=9)
         url    = "https://api.twitter.com/1.1/statuses/update.json"
         params = {"status": u"行ってはダメだ!!!! \n" + japan_time.strftime("%Y/%m/%d %H:%M:%S")}
-        if tweet_count > 7 :
+        if tweet_count > -1 :
             twitter = OAuth1Session(oath_key_dict["consumer_key"],
                                     oath_key_dict["consumer_secret"],
                                     oath_key_dict["access_token"],
