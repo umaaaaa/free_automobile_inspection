@@ -7,6 +7,7 @@ import time, calendar
 import datetime
 import locale
 import os
+import commands
 
 oath_key_dict = {
         "consumer_key"       : os.environ.get('CONSUMER_KEY'),
@@ -60,9 +61,13 @@ class SearchTweets:
                                     oath_key_dict["consumer_secret"],
                                     oath_key_dict["access_token"],
                                     oath_key_dict["access_token_secret"])
-            req = twitter.post(url, params = params)
+            if commands.getoutput("cat ./value") == 'True' :
+                req = twitter.post(url, params = params)
+
+            commands.getoutput("echo 'False' > ./value");
             return True
         else :
+            commands.getoutput("echo 'True' > ./value");
             return False
 
     def create_oath_session(self, oath_key_dict):
@@ -94,4 +99,3 @@ class SearchTweets:
 if __name__ == "__main__":
     search_tweets = SearchTweets()
     search_tweets.fetch_tweet()
-
